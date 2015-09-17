@@ -3,9 +3,11 @@
 {% if company_list %}
     <ul>
     {% for company in company_list %}
-        <li><a href="{% url 'companies:view' company.id %}">{{ company.name }}</a></li>
+        <li><a href="{% url 'companies:view' company.id %}">{{ company.name }} ({{ company.id }})</a></li>
     {% endfor %}
     </ul>
 {% else %}
     <p>No companies are available.</p>
 {% endif %}
+
+<a href="{% url 'companies:index' %}">Back to company index</a>
