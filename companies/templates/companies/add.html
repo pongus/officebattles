@@ -1,0 +1,11 @@
+<h1>Company add</h1>
+
+<form action="{% url 'company:save' %}" method="post">
+    {% csrf_token %}
+    <label for="company-name">Name</label><br />
+    <input type="text" name="company-name" id="company-name" placeholder="Company name" />
+    <input type="submit" value="Add" />
+</form>
+
+<a href="{% url 'company:index' %}">Company index</a>
+<a href="{% url 'company:list' %}">Company list</a>
