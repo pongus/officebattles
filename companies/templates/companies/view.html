@@ -1,3 +1,5 @@
 <h1>{{ company.name }} ({{ company.id }})</h1>
 
-<a href="{% url 'companies:list' %}">Back to company list</a>
+<a href="{% url 'company:index' %}">Company index</a>
+<a href="{% url 'company:add' %}">Company add</a>
+<a href="{% url 'company:list' %}">Company list</a>

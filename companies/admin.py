@@ -5,10 +5,9 @@ from .models import Company
 
 class CompanyAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('Name',    {'fields': ['name']}),
-        ('Created', {'fields': ['created'], 'classes': ['collapse']}),
+        ('Company name', {'fields': ['name']}),
     ]
-    list_filter = ['created']
+    list_filter = ['created', 'updated']
     search_fields = ['name']
 
 admin.site.register(Company, CompanyAdmin)
