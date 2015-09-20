@@ -4,9 +4,8 @@ from django.contrib import admin
 from .models import Company
 
 class CompanyAdmin(admin.ModelAdmin):
-    fieldsets = [
-        ('Company name', {'fields': ['name']}),
-    ]
+    fields = ['name']
+    list_display = ('name', 'created', 'updated')
     list_filter = ['created', 'updated']
     search_fields = ['name']
 
