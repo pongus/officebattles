@@ -1,16 +1,18 @@
 <h1>Company add</h1>
 
+<h2>Form</h2>
+
 <form action="{% url 'company:save' %}" method="post">
     {% csrf_token %}
-    <label for="company-name">Name</label><br />
+    <label for="company-name">Company name</label><br />
     <input type="text" name="company-name" id="company-name" placeholder="Enter company name" />
     <input type="submit" value="Save" />
 </form>
 
 <h2>Links</h2>
-<h3>Company links</h3>
+
 <ul>
-    <li><a href="{% url 'company:index' %}">Company index</a></li>
-    <li><a href="{% url 'company:list' %}">Company list</a></li>
+    <li><a href="{% url 'company:index' %}">Home</a></li>
     <li><a href="{% url 'company:add' %}">Company add</a></li>
+    <li><a href="{% url 'company:list' %}">Company list</a></li>
 </ul>

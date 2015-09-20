@@ -1,9 +1,13 @@
-<h1>{{ company.name }} ({{ company.id }})</h1>
+<h1>Company view</h1>
+
+<h2>Company name: {{ company.name }}</h2>
 
 <h2>Links</h2>
-<h3>Company links</h3>
+
 <ul>
-    <li><a href="{% url 'company:index' %}">Company index</a></li>
-    <li><a href="{% url 'company:list' %}">Company list</a></li>
+    <li><a href="{% url 'company:index' %}">Home</a></li>
     <li><a href="{% url 'company:add' %}">Company add</a></li>
+    <li><a href="{% url 'company:list' %}">Company list</a></li>
+    <li><a href="{% url 'company:view' company.id %}">Company view</a>
+    <li><a href="{% url 'office:list' company.id %}">Company office list</a>
 </ul>

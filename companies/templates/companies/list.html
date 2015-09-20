@@ -1,5 +1,7 @@
 <h1>Company list</h1>
 
+<h2>Companies</h2>
+
 {% if company_list %}
     <ul>
     {% for company in company_list %}
@@ -11,9 +13,9 @@
 {% endif %}
 
 <h2>Links</h2>
-<h3>Company links</h3>
+
 <ul>
-    <li><a href="{% url 'company:index' %}">Company index</a></li>
-    <li><a href="{% url 'company:list' %}">Company list</a></li>
+    <li><a href="{% url 'company:index' %}">Home</a></li>
     <li><a href="{% url 'company:add' %}">Company add</a></li>
+    <li><a href="{% url 'company:list' %}">Company list</a></li>
 </ul>
