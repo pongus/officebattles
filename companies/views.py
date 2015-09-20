@@ -21,7 +21,6 @@ def save(request):
     company_updated = timezone.now()
     company = Company(name=company_name, updated=company_updated)
     company.save()
-
     return HttpResponseRedirect('/company/' + str(company.id))
 
 def view(request, company_id):
