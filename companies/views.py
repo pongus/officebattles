@@ -2,14 +2,14 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 
-from .models import Company
+from companies.models import Company
 
 # Create your views here.
 def index(request):
     return render(request, 'companies/index.html')
 
 def list(request):
-    company_list = Company.objects.order_by('-created')
+    company_list = Company.objects.order_by('-updated')
     context = {'company_list': company_list}
     return render(request, 'companies/list.html', context)
 
@@ -25,4 +25,5 @@ def save(request):
 
 def view(request, company_id):
     company = get_object_or_404(Company, pk=company_id)
-    return render(request, 'companies/view.html', {'company': company})
+    context = {'company': company}
+    return render(request, 'companies/view.html', context)

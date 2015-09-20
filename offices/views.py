@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.utils import timezone
 
 from companies.models import Company
-from .models import Office
+from offices.models import Office
 
 # Create your views here.
 def add(request, company_id):
@@ -22,7 +22,7 @@ def save(request, company_id):
 
 def list(request, company_id):
     company = get_object_or_404(Company, pk=company_id)
-    office_list = Office.objects.filter(company_id=company_id).order_by('-created')
+    office_list = Office.objects.filter(company_id=company_id).order_by('-updated')
     context = {
         'company': company,
         'office_list': office_list,
