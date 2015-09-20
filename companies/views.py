@@ -22,7 +22,7 @@ def save(request):
     company = Company(name=company_name, updated=company_updated)
     company.save()
 
-    return HttpResponseRedirect('/company/' + str(company.id) + '/view')
+    return HttpResponseRedirect('/company/' + str(company.id))
 
 def view(request, company_id):
     company = get_object_or_404(Company, pk=company_id)
