@@ -1,0 +1,19 @@
+<h1>Company office add</h1>
+
+<h2>Form</h2>
+
+<form action="{% url 'office:save' company.id %}" method="post">
+    {% csrf_token %}
+    <label for="office-name">Office name</label><br />
+    <input type="text" name="office-name" id="office-name" placeholder="Enter office name" />
+    <input type="submit" value="Save" />
+</form>
+
+<h2>Links</h2>
+
+<ul>
+    <li><a href="{% url 'company:index' %}">Home</a></li>
+    <li><a href="{% url 'company:view' company.id %}">Company home</a>
+    <li><a href="{% url 'office:add' company.id %}">Company office add</a></li>
+    <li><a href="{% url 'office:list' company.id %}">Company office list</a></li>
+</ul>

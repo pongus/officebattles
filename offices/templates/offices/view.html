@@ -1,0 +1,23 @@
+<h1>Company office view</h1>
+
+<h2>Office name: {{ office.name }}</h2>
+
+<h2>Details</h2>
+
+<ul>
+    <li>Company: {{ company.name }} </li>
+    <li>Company ID: {{ office.company_id }}</li>
+    <li>Office: {{ office.name }} </li>
+    <li>Office ID: {{ office.id }}</li>
+</ul>
+
+<h2>Links</h2>
+
+<ul>
+    <li><a href="{% url 'company:index' %}">Home</a></li>
+    <li><a href="{% url 'company:add' %}">Company add</a></li>
+    <li><a href="{% url 'company:list' %}">Company list</a></li>
+    <li><a href="{% url 'company:view' company.id %}">Company home</a>
+    <li><a href="{% url 'office:add' office.company_id %}">Company office add</a></li>
+    <li><a href="{% url 'office:list' office.company_id %}">Company office list</a></li>
+</ul>
