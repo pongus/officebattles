@@ -1,15 +1,17 @@
 <h1>Office game view</h1>
 
-<h2>Game name: {{ game.name }}</h2>
+<h2>Info</h2>
+
+<ul>
+    <li>Name: {{ game.name }}</li>
+    <li>Mode: {{ game.get_mode_display }}</li>
+</ul>
 
 <h2>Links</h2>
 
 <ul>
-    <li><a href="{% url 'company:index' %}">Home</a></li>
-    <li><a href="{% url 'company:add' %}">Company add</a></li>
-    <li><a href="{% url 'company:list' %}">Company list</a></li>
-    <li><a href="{% url 'company:view' game.company_id %}">Company home</a>
-    <li><a href="{% url 'office:add' game.company_id %}">Company office add</a></li>
-    <li><a href="{% url 'office:list' game.company_id %}">Company office list</a></li>
-    <li><a href="{% url 'game:list' game.company_id game.office_id %}">Office game list</a>
+    <li><a href="{% url 'office:add' office.company_id %}">Office add</a></li>
+    <li><a href="{% url 'office:list' office.company_id %}">Office list</a>
+    <li><a href="{% url 'game:add' office.company_id office.id %}">Office game add</a>
+    <li><a href="{% url 'game:list' office.company_id office.id %}">Office game list</a></li>
 </ul>

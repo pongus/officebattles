@@ -4,18 +4,15 @@
 
 <form action="{% url 'game:save' office.company_id office.id %}" method="post">
     {% csrf_token %}
-    <label for="game-name">Game name</label><br />
-    <input type="text" name="game-name" id="game-name" placeholder="Enter game name" />
-    <!-- TODO: Add game_mode (required), min_players (optional) and max_players (optional) fields-->
+    {{ form }}
     <input type="submit" value="Save" />
 </form>
 
 <h2>Links</h2>
 
 <ul>
-    <li><a href="{% url 'company:index' %}">Home</a></li>
-    <li><a href="{% url 'company:view' office.company_id %}">Company home</a>
-    <li><a href="{% url 'office:add' office.company_id %}">Company office add</a></li>
-    <li><a href="{% url 'office:list' office.company_id %}">Company office list</a></li>
-    <li><a href="{% url 'game:list' office.company_id office.id %}">Office game list</a>
+    <li><a href="{% url 'office:add' office.company_id %}">Office add</a></li>
+    <li><a href="{% url 'office:list' office.company_id %}">Office list</a>
+    <li><a href="{% url 'game:add' office.company_id office.id %}">Office game add</a>
+    <li><a href="{% url 'game:list' office.company_id office.id %}">Office game list</a></li>
 </ul>
