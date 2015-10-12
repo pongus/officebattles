@@ -39,7 +39,6 @@ def save(request, company_id, office_id):
     game_mode = request.POST.get('mode')
     game_updated = timezone.now()
     game = Game(
-        company_id = company_id,
         office_id = office_id,
         name = game_name,
         mode = game_mode,

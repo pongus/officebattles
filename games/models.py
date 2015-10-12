@@ -11,7 +11,6 @@ GAME_MODES = (
 )
 
 class Game(models.Model):
-    company = models.ForeignKey('companies.Company')
     office = models.ForeignKey('offices.Office')
     name = models.CharField(max_length=128)
     mode = models.PositiveSmallIntegerField(choices=GAME_MODES, default=0)
