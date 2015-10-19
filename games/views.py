@@ -49,22 +49,16 @@ def save(request, company_id, office_id):
     return HttpResponseRedirect('/company/' + str(company_id) + '/office/' + str(office_id) + '/game/' + str(game.id))
 
 def list(request, company_id, office_id):
-    company = get_object_or_404(Company, pk=company_id)
     office = get_object_or_404(Office, pk=office_id)
-    total_game_list = Game.objects.order_by('-updated')
-    company_game_list = Game.objects.filter(company_id=company_id).order_by('-updated')
     office_game_list = Game.objects.filter(office_id=office_id).order_by('-updated')
     context = {
         'office': office,
-        'total_game_list': total_game_list,
-        'company_game_list': company_game_list,
         'office_game_list': office_game_list,
     }
 
     return render(request, 'games/list.html', context)
 
 def view(request, company_id, office_id, game_id):
-    company = get_object_or_404(Company, pk=company_id)
     office = get_object_or_404(Office, pk=office_id)
     game = get_object_or_404(Game, pk=game_id)
     context = {

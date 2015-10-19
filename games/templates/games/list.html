@@ -7,7 +7,7 @@
 {% if office_game_list %}
     <ul>
     {% for game in office_game_list %}
-        <li><a href="{% url 'game:view' game.company_id game.office_id game.id %}">{{ game.name }} ({{ game.id }})</a></li>
+        <li><a href="{% url 'game:view' office.company_id game.office_id game.id %}">{{ game.name }} ({{ game.id }})</a></li>
     {% endfor %}
     </ul>
 {% else %}
