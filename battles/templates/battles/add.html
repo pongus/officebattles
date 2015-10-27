@@ -1,0 +1,9 @@
+<h1>Battle add</h1>
+
+<h2>Form</h2>
+
+<form action="{% url 'battle:save' office.company_id game.office_id game.id %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Save" />
+</form>
