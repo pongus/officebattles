@@ -8,8 +8,8 @@ class Battle(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    # def __str__(self):
-    #     return str(self.game)
+    def __str__(self):
+        return str(self.game)
 
 class Result(models.Model):
     battle = models.ForeignKey('battles.Battle')
@@ -19,5 +19,5 @@ class Result(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    # def __str__(self):
-    #     return str(self.player) + ', Rank: ' + str(self.rank) + ', Score: ' + str(self.score)
+    def __str__(self):
+        return str(self.player) + ', Rank: ' + str(self.rank) + ', Score: ' + str(self.score)
