@@ -1,6 +1,4 @@
 from django.contrib import admin
-
-# Register your models here.
 from .models import Battle, Result
 
 class BattleAdmin(admin.ModelAdmin):
