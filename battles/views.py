@@ -9,8 +9,8 @@ def battle_new(request):
 
         if form.is_valid():
             battle = form.save(commit=False)
-            # TODO: Add players before saving... m2m?
             battle.save()
+            form.save_m2m()
 
             return render(request, 'battles/battle_view.html', {'battle': battle})
     else:
@@ -33,8 +33,8 @@ def battle_edit(request, battle_id):
 
         if form.is_valid():
             battle = form.save(commit=False)
-            # TODO: Add players before saving... m2m?
             battle.save()
+            form.save_m2m()
 
             return render(request, 'battles/battle_view.html', {'battle': battle})
     else:
