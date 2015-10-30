@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Battle(models.Model):
     game = models.ForeignKey('games.Game')
     players = models.ManyToManyField(User)
@@ -9,6 +10,7 @@ class Battle(models.Model):
 
     def __str__(self):
         return str(self.game)
+
 
 class Result(models.Model):
     battle = models.ForeignKey('battles.Battle')

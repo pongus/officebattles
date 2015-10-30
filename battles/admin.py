@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Battle, Result
 
+
 class BattleAdmin(admin.ModelAdmin):
     fields = ['game', 'players']
     list_display = ('game', 'created', 'updated')
@@ -8,6 +9,7 @@ class BattleAdmin(admin.ModelAdmin):
     search_fields = ['game', 'players']
 
 admin.site.register(Battle, BattleAdmin)
+
 
 class ResultAdmin(admin.ModelAdmin):
     fields = ['battle', 'player', 'rank', 'score']
