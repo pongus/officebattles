@@ -1,6 +1,15 @@
 <h1>Battle view</h1>
 
-<li>Game: {{ battle.game }}</li>
-<li>Players: {{ battle.players }}</li>
+<ul>
+    <li>Date: {{ battle.created }}</li>
+    <li>Game: {{ battle.game }}</li>
+    <li>Players:
+        <ul>
+        {% for player in battle.players.all %}
+            <li>{{ player.username }}</li>
+        {% endfor %}
+        </ul>
+    </li>
+</ul>
 
 <a href="{% url 'battle:battle_edit' battle_id=battle.pk %}">Edit battle</a>
