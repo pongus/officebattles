@@ -6,9 +6,9 @@
 
 <ul>
     <li><a href="{% url 'company:index' %}">Home</a></li>
-    <li><a href="{% url 'company:add' %}">Company add</a></li>
+    <li><a href="{% url 'company:company_new' %}">Company add</a></li>
     <li><a href="{% url 'company:list' %}">Company list</a></li>
-    <li><a href="{% url 'company:view' company.id %}">Company home</a>
+    <li><a href="{% url 'company:company_view' company.id %}">Company home</a>
     <li><a href="{% url 'office:add' company.id %}">Company office add</a></li>
     <li><a href="{% url 'office:list' company.id %}">Company office list</a>
 </ul>
