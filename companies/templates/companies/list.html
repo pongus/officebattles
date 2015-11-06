@@ -5,7 +5,10 @@
 {% if company_list %}
     <ul>
     {% for company in company_list %}
-        <li><a href="{% url 'company:company_view' company.id %}">{{ company.name }} ({{ company.id }})</a></li>
+        <li>
+            <a href="{% url 'company:company_view' company.id %}">{{ company.name }} ({{ company.id }})</a>
+            <a href="{% url 'company:company_edit' company.id %}"> - Edit</a>
+        </li>
     {% endfor %}
     </ul>
 {% else %}
