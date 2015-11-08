@@ -9,7 +9,7 @@ class Battle(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return str(self.game)
+        return self.game
 
 
 class Result(models.Model):
@@ -21,4 +21,4 @@ class Result(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return str(self.player) + ', Rank: ' + str(self.rank) + ', Score: ' + str(self.score)
+        return self.player + ': ' + self.score
