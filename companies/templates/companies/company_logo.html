@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <h1>Company logo</h1>
+
+    {% if files %}
+        <ul>
+        {% for file in files %}
+            <li>
+                <a href="{{ file.logo.path }}">{{ file.logo.name }} ({{ file.logo.width }} x {{ file.logo.height }})</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No logos are available.</p>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <p>{{ form.non_field_errors }}</p>
+        <p>{{ form.logo.label_tag }} {{ form.logo.help_text }}</p>
+        <p>
+            {{ form.logo.errors }}
+            {{ form.logo }}
+        </p>
+        <p><input type="submit" value="Upload" /></p>
+    </form>
+{% endblock %}

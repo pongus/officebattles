@@ -1,9 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from .forms import CompanyForm
+from .models import Company, Logo
+from .forms import CompanyForm, LogoForm
 
-from companies.models import Company
 
-# Create your views here.
 def index(request):
     return render(request, 'companies/index.html')
 
@@ -52,3 +51,19 @@ def company_view(request, company_id):
     company = get_object_or_404(Company, pk=company_id)
     return render(request, 'companies/company_view.html', {'company': company})
 
+
+def company_logo(request, company_id):
+    if request.method == 'POST':
+        form = LogoForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            file = Logo(company_id=company_id, logo=request.FILES['logo'])
+            file.save()
+
+            return render(request, 'companies/company_logo.html', {'file': file})
+    else:
+        form = LogoForm()
+
+    files = Logo.objects.all()
+
+    return render(request, 'companies/company_logo.html', {'form': form, 'files': files})

@@ -1,7 +1,6 @@
 from django.contrib import admin
+from .models import Company, Logo
 
-# Register your models here.
-from .models import Company
 
 class CompanyAdmin(admin.ModelAdmin):
     fields = ['name']
@@ -10,3 +9,12 @@ class CompanyAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 admin.site.register(Company, CompanyAdmin)
+
+
+class LogoAdmin(admin.ModelAdmin):
+    fields = ['logo', 'company']
+    list_display = ('logo', 'company', 'created', 'updated')
+    list_filter = ['created', 'updated']
+    search_fields = ['logo']
+
+admin.site.register(Logo, LogoAdmin)

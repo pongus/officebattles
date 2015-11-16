@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
 class Company(models.Model):
     name = models.CharField(max_length=128, unique=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -8,3 +8,10 @@ class Company(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Logo(models.Model):
+    company = models.ForeignKey('companies.Company')
+    logo = models.ImageField(upload_to='logos/%Y/%m/%d', height_field=None, width_field=None, max_length=128)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
