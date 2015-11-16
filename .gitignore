@@ -9,7 +9,7 @@ settings.py
 
 db.sqlite3
 
-media/temp
+media/
 
 battles/migrations/
 companies/migrations/
