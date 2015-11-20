@@ -32,6 +32,7 @@ def list(request, company_id):
     }
     return render(request, 'offices/list.html', context)
 
+
 def office_view(request, company_id, office_id):
     company = get_object_or_404(Company, pk=company_id)
     office = get_object_or_404(Office, pk=office_id)
