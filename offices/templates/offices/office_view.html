@@ -6,10 +6,10 @@
 
 <ul>
     <li><a href="{% url 'company:index' %}">Home</a></li>
-    <li><a href="{% url 'company:add' %}">Company add</a></li>
+    <li><a href="{% url 'company:company_new' %}">Company add</a></li>
     <li><a href="{% url 'company:list' %}">Company list</a></li>
-    <li><a href="{% url 'company:view' office.company_id %}">Company home</a>
-    <li><a href="{% url 'office:add' office.company_id %}">Company office add</a></li>
+    <li><a href="{% url 'company:company_view' office.company_id %}">Company home</a>
+    <li><a href="{% url 'office:office_new' office.company_id %}">Company office add</a></li>
     <li><a href="{% url 'office:list' office.company_id %}">Company office list</a></li>
     <li><a href="{% url 'game:add' office.company_id office.id %}">Office game add</a>
     <li><a href="{% url 'game:list' office.company_id office.id %}">Office game list</a>

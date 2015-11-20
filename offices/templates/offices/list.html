@@ -7,7 +7,7 @@
 {% if office_list %}
     <ul>
     {% for office in office_list %}
-        <li><a href="{% url 'office:view' office.company_id office.id %}">{{ office.name }} ({{ office.id }})</a></li>
+        <li><a href="{% url 'office:office_view' office.company_id office.id %}">{{ office.name }} ({{ office.id }})</a></li>
     {% endfor %}
     </ul>
 {% else %}
@@ -18,9 +18,9 @@
 
 <ul>
     <li><a href="{% url 'company:index' %}">Home</a></li>
-    <li><a href="{% url 'company:add' %}">Company add</a></li>
+    <li><a href="{% url 'company:company_new' %}">Company add</a></li>
     <li><a href="{% url 'company:list' %}">Company list</a></li>
-    <li><a href="{% url 'company:view' company.id %}">Company view</a>
-    <li><a href="{% url 'office:add' company.id %}">Company office add</a></li>
+    <li><a href="{% url 'company:company_view' company.id %}">Company view</a>
+    <li><a href="{% url 'office:office_new' company.id %}">Company office add</a></li>
     <li><a href="{% url 'office:list' company.id %}">Company office list</a>
 </ul>

@@ -4,21 +4,24 @@ from django.utils import timezone
 
 from companies.models import Company
 from offices.models import Office
+from .forms import OfficeForm
 
 # Create your views here.
-def add(request, company_id):
-    company = get_object_or_404(Company, pk=company_id)
-    context = {
-        'company': company
-    }
-    return render(request, 'offices/add.html', context)
+def office_new(request, company_id):
+    if request.method == 'POST':
+        form = OfficeForm(request.POST)
 
-def save(request, company_id):
-    office_name = request.POST.get('office-name')
-    office_updated = timezone.now()
-    office = Office(company_id=company_id, name=office_name, updated=office_updated)
-    office.save()
-    return HttpResponseRedirect('/company/' + str(office.company_id) + '/office/' + str(office.id))
+        if form.is_valid():
+            office = form.save(commit=False)
+            office.save()
+            form.save_m2m()
+
+            return render(request, 'offices/office_view.html', {'office': office})
+    else:
+        form = OfficeForm()
+
+    return render(request, 'offices/office_edit.html', {'form': form})
+
 
 def list(request, company_id):
     company = get_object_or_404(Company, pk=company_id)
@@ -29,11 +32,11 @@ def list(request, company_id):
     }
     return render(request, 'offices/list.html', context)
 
-def view(request, company_id, office_id):
+def office_view(request, company_id, office_id):
     company = get_object_or_404(Company, pk=company_id)
     office = get_object_or_404(Office, pk=office_id)
     context = {
         'company': company,
         'office': office,
     }
-    return render(request, 'offices/view.html', context)
+    return render(request, 'offices/office_view.html', context)
