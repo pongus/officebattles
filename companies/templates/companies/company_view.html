@@ -1,14 +1,17 @@
-<h1>Company view</h1>
+{% extends 'base.html' %}
 
-<h2>Company name: {{ company.name }}</h2>
+{% block main %}
+    <h1>Company view</h1>
 
-<h2>Links</h2>
+    <h2>Company name: {{ company.name }}</h2>
 
-<ul>
-    <li><a href="{% url 'company:index' %}">Home</a></li>
-    <li><a href="{% url 'company:company_new' %}">Company add</a></li>
-    <li><a href="{% url 'company:list' %}">Company list</a></li>
-    <li><a href="{% url 'company:company_view' company.id %}">Company home</a>
-    <li><a href="{% url 'office:office_new' company.id %}">Company office add</a></li>
-    <li><a href="{% url 'office:list' company.id %}">Company office list</a>
-</ul>
+    <h2>Links</h2>
+    <ul>
+        <li><a href="{% url 'company:index' %}">Home</a></li>
+        <li><a href="{% url 'company:company_new' %}">Company add</a></li>
+        <li><a href="{% url 'company:list' %}">Company list</a></li>
+        <li><a href="{% url 'company:company_view' company.id %}">Company home</a>
+        <li><a href="{% url 'office:office_new' company.id %}">Company office add</a></li>
+        <li><a href="{% url 'office:list' company.id %}">Company office list</a>
+    </ul>
+{% endblock %}

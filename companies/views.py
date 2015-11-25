@@ -21,7 +21,6 @@ def company_new(request):
             company = form.save(commit=False)
             company.save()
             form.save_m2m()
-
             return render(request, 'companies/company_view.html', {'company': company})
     else:
         form = CompanyForm()
@@ -39,7 +38,6 @@ def company_edit(request, company_id):
             company = form.save(commit=False)
             company.save()
             form.save_m2m()
-
             return render(request, 'companies/company_view.html', {'company': company})
     else:
         form = CompanyForm(instance=company)
@@ -52,18 +50,17 @@ def company_view(request, company_id):
     return render(request, 'companies/company_view.html', {'company': company})
 
 
-def company_logo(request, company_id):
+def logo_upload(request, company_id):
+    company = get_object_or_404(Company, pk=company_id)
+
     if request.method == 'POST':
         form = LogoForm(request.POST, request.FILES)
-
         if form.is_valid():
-            file = Logo(company_id=company_id, logo=request.FILES['logo'])
-            file.save()
-
-            return render(request, 'companies/company_logo.html', {'file': file})
+            form = Logo(logo=request.FILES['logo'])
+            form.company_id = company_id
+            form.save()
+            return render(request, 'companies/company_view.html', {'company': company})
     else:
         form = LogoForm()
 
-    files = Logo.objects.all()
-
-    return render(request, 'companies/company_logo.html', {'form': form, 'files': files})
+    return render(request, 'companies/logo_upload.html', {'form': form})
