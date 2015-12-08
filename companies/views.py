@@ -47,7 +47,14 @@ def company_edit(request, company_id):
 
 def company_view(request, company_id):
     company = get_object_or_404(Company, pk=company_id)
-    return render(request, 'companies/company_view.html', {'company': company})
+    latest_logo = Logo.objects.filter(company_id=company_id).order_by('-updated').first()
+
+    context = {
+        'company': company,
+        'latest_logo': latest_logo,
+    }
+
+    return render(request, 'companies/company_view.html', context)
 
 
 def logo_upload(request, company_id):

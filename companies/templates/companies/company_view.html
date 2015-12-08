@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 
+{% block logo %}
+    {% if latest_logo %}
+        <img src="{{ latest_logo.logo.url }}" alt="{{ company.name }}">
+    {% endif %}
+{% endblock %}
+
 {% block main %}
     <h1>Company view</h1>
 
