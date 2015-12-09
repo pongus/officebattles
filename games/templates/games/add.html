@@ -1,18 +1,28 @@
-<h1>Office game add</h1>
+{% extends 'base.html' %}
 
-<h2>Form</h2>
+{% block title %}
+    Office Battles | Game Add
+{% endblock %}
 
-<form action="{% url 'game:save' office.company_id office.id %}" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Save" />
-</form>
+{% block header %}
+{% endblock %}
 
-<h2>Links</h2>
+{% block main %}
+    <h1>Game Add</h1>
 
-<ul>
-    <li><a href="{% url 'office:add' office.company_id %}">Office add</a></li>
-    <li><a href="{% url 'office:list' office.company_id %}">Office list</a>
-    <li><a href="{% url 'game:add' office.company_id office.id %}">Office game add</a>
-    <li><a href="{% url 'game:list' office.company_id office.id %}">Office game list</a></li>
-</ul>
+    <form action="{% url 'game:save' office.company_id office.id %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Save" />
+    </form>
+{% endblock %}
+
+{% block footer %}
+    <h2>Links</h2>
+    <ul>
+        <li><a href="{% url 'office:office_new' office.company_id %}">Office add</a></li>
+        <li><a href="{% url 'office:list' office.company_id %}">Office list</a>
+        <li><a href="{% url 'game:add' office.company_id office.id %}">Office game add</a>
+        <li><a href="{% url 'game:list' office.company_id office.id %}">Office game list</a></li>
+    </ul>
+{% endblock %}

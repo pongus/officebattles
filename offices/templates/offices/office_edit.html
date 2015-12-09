@@ -1,6 +1,28 @@
-<h1>Company office add</h1>
+{% extends 'base.html' %}
 
-<form method="POST">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save" />
-</form>
+{% block title %}
+    Office Battles | Office New/Edit
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block main %}
+    <h1>Office New/Edit</h1>
+
+    <form method="POST">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Save" />
+    </form>
+{% endblock %}
+
+{% block footer %}
+    <h2>Links</h2>
+    <ul>
+        <li><a href="{% url 'company:company_list' %}">Company list</a></li>
+        <li><a href="{% url 'company:company_new' %}">Company add</a></li>
+        <li><a href="{% url 'company:company_view' office.company_id %}">Company view</a></li>
+        <li><a href="{% url 'office:list' office.company_id %}">Office list</a></li>
+        <li><a href="{% url 'office:office_new' office.company_id %}">Office add</a></li>
+    </ul>
+{% endblock %}

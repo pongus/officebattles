@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{ company.name }} Battles | Company View
+    Office Battles | Company List
 {% endblock %}
 
 {% block header %}
@@ -14,18 +14,25 @@
 {% endblock %}
 
 {% block main %}
-    <h1>Company View</h1>
+    <h1>Company List</h1>
 
-    Company name: {{ company.name }}
+    {% if company_list %}
+        <ul>
+        {% for company in company_list %}
+            <li>
+                <a href="{% url 'company:company_view' company.id %}">{{ company.name }} ({{ company.id }})</a>
+                <a href="{% url 'company:company_edit' company.id %}"> - Edit</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No companies are available.</p>
+    {% endif %}
 {% endblock %}
 
 {% block footer %}
     <h2>Links</h2>
     <ul>
-        <li><a href="{% url 'company:company_list' %}">Company list</a></li>
         <li><a href="{% url 'company:company_new' %}">Company add</a></li>
-        <li><a href="{% url 'company:logo_upload' company.id %}">Company logo</a></li>
-        <li><a href="{% url 'office:list' company.id %}">Office list</a>
-        <li><a href="{% url 'office:office_new' company.id %}">Office add</a></li>
     </ul>
 {% endblock %}

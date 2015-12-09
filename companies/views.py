@@ -3,14 +3,11 @@ from .models import Company, Logo
 from .forms import CompanyForm, LogoForm
 
 
-def index(request):
-    return render(request, 'companies/index.html')
-
-
-def list(request):
+def company_list(request):
     company_list = Company.objects.order_by('-updated')
     context = {'company_list': company_list}
-    return render(request, 'companies/list.html', context)
+
+    return render(request, 'companies/company_list.html', context)
 
 
 def company_new(request):
@@ -44,8 +41,9 @@ def company_edit(request, company_id):
         form = CompanyForm(instance=company)
 
     context = {
-        'form': form,
-        'company_logo': company_logo
+        'company': company,
+        'company_logo': company_logo,
+        'form': form
     }
 
     return render(request, 'companies/company_edit.html', context)
@@ -69,6 +67,7 @@ def logo_upload(request, company_id):
 
     if request.method == 'POST':
         form = LogoForm(request.POST, request.FILES)
+
         if form.is_valid():
             form = Logo(logo=request.FILES['logo'])
             form.company_id = company_id
@@ -78,8 +77,9 @@ def logo_upload(request, company_id):
         form = LogoForm()
 
     context = {
-        'form': form,
-        'company_logo': company_logo
+        'company': company,
+        'company_logo': company_logo,
+        'form': form
     }
 
     return render(request, 'companies/logo_upload.html', context)

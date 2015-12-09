@@ -1,12 +1,9 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect
-from django.utils import timezone
-
 from companies.models import Company
 from offices.models import Office
 from .forms import OfficeForm
 
-# Create your views here.
+
 def office_new(request, company_id):
     if request.method == 'POST':
         form = OfficeForm(request.POST)
@@ -26,18 +23,22 @@ def office_new(request, company_id):
 def list(request, company_id):
     company = get_object_or_404(Company, pk=company_id)
     office_list = Office.objects.filter(company_id=company_id).order_by('-updated')
+
     context = {
         'company': company,
         'office_list': office_list,
     }
+
     return render(request, 'offices/list.html', context)
 
 
 def office_view(request, company_id, office_id):
     company = get_object_or_404(Company, pk=company_id)
     office = get_object_or_404(Office, pk=office_id)
+
     context = {
         'company': company,
         'office': office,
     }
+
     return render(request, 'offices/office_view.html', context)

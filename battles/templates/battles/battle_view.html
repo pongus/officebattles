@@ -1,15 +1,31 @@
-<h1>Battle view</h1>
+{% extends 'base.html' %}
 
-<ul>
-    <li>Date: {{ battle.created }}</li>
-    <li>Game: {{ battle.game }}</li>
-    <li>Players:
-        <ul>
-        {% for player in battle.players.all %}
-            <li>{{ player.username }}</li>
-        {% endfor %}
-        </ul>
-    </li>
-</ul>
+{% block title %}
+    Office Battles | Battle View
+{% endblock %}
 
-<a href="{% url 'battle:battle_edit' battle_id=battle.pk %}">Edit battle</a>
+{% block header %}
+{% endblock %}
+
+{% block main %}
+    <h1>Battle View</h1>
+
+    <ul>
+        <li>Date: {{ battle.created }}</li>
+        <li>Game: {{ battle.game }}</li>
+        <li>Players:
+            <ul>
+            {% for player in battle.players.all %}
+                <li>{{ player.username }}</li>
+            {% endfor %}
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block footer %}
+    <h2>Links</h2>
+    <ul>
+        <li><a href="{% url 'battle:battle_edit' battle_id=battle.pk %}">Edit battle</a></li>
+    </ul>
+{% endblock %}

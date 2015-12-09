@@ -1,16 +1,27 @@
-<h1>Company office view</h1>
+{% extends 'base.html' %}
 
-<h2>Office name: {{ office.name }}</h2>
+{% block title %}
+    Office Battles | Office View
+{% endblock %}
 
-<h2>Links</h2>
+{% block header %}
+{% endblock %}
 
-<ul>
-    <li><a href="{% url 'company:index' %}">Home</a></li>
-    <li><a href="{% url 'company:company_new' %}">Company add</a></li>
-    <li><a href="{% url 'company:list' %}">Company list</a></li>
-    <li><a href="{% url 'company:company_view' office.company_id %}">Company home</a>
-    <li><a href="{% url 'office:office_new' office.company_id %}">Company office add</a></li>
-    <li><a href="{% url 'office:list' office.company_id %}">Company office list</a></li>
-    <li><a href="{% url 'game:add' office.company_id office.id %}">Office game add</a>
-    <li><a href="{% url 'game:list' office.company_id office.id %}">Office game list</a>
-</ul>
+{% block main %}
+    <h1>Office View</h1>
+
+    <span>Office name: {{ office.name }}</span>
+{% endblock %}
+
+{% block footer %}
+    <h2>Links</h2>
+    <ul>
+        <li><a href="{% url 'company:company_list' %}">Company list</a></li>
+        <li><a href="{% url 'company:company_new' %}">Company add</a></li>
+        <li><a href="{% url 'company:company_view' office.company_id %}">Company view</a></li>
+        <li><a href="{% url 'office:list' office.company_id %}">Office list</a></li>
+        <li><a href="{% url 'office:office_new' office.company_id %}">Office add</a></li>
+        <li><a href="{% url 'game:list' office.company_id office.id %}">Game list</a></li>
+        <li><a href="{% url 'game:add' office.company_id office.id %}">Game add</a></li>
+    </ul>
+{% endblock %}

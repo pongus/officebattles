@@ -1,6 +1,20 @@
-<h1>Result new/edit</h1>
+{% extends 'base.html' %}
 
-<form method="POST">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save" />
-</form>
+{% block title %}
+    Office Battles | Result New/Edit
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block main %}
+    <h1>Result New/Edit</h1>
+
+    <form method="POST">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Save" />
+    </form>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

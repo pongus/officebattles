@@ -1,19 +1,30 @@
-{# {% extends 'base.html' %} #}
+{% extends 'base.html' %}
 
-{% block logo %}
+{% block title %}
+    {{ company.name }} Battles | Company New/Edit
+{% endblock %}
+
+{% block header %}
     {% if company_logo %}
-        <h1>{{ company.name }} Battles</h1>
-        <img src="{{ company_logo.logo.url }}" alt="{{ company.name }} Logo">
+        <span>{{ company.name }} Battles</span>
+        <img src="{{ company_logo.logo.url }}" alt="{{ company.name }} Logo" class="logo">
     {% else %}
-        <h1>Office Battles</h1>
+        <span>Office Battles</span>
     {% endif %}
 {% endblock %}
 
-{% block content %}
-    <h2>company new/edit</h2>
+{% block main %}
+    <h1>Company New/Edit</h1>
 
     <form method="POST">{% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Save" />
     </form>
+{% endblock %}
+
+{% block footer %}
+    <h2>Links</h2>
+    <ul>
+        <li><a href="{% url 'company:company_list' %}">Company list</a></li>
+    </ul>
 {% endblock %}

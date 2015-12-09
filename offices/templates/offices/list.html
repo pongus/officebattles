@@ -1,26 +1,35 @@
-<h1>Company office list</h1>
+{% extends 'base.html' %}
 
-<h2>Company name: {{ company.name }}</h2>
+{% block title %}
+    Office Battles | Office List
+{% endblock %}
 
-<h2>Offices</h2>
+{% block header %}
+{% endblock %}
 
-{% if office_list %}
+{% block main %}
+    <h1>Office List</h1>
+
+    <span>Company name: {{ company.name }}</span>
+
+    {% if office_list %}
+        <ul>
+        {% for office in office_list %}
+            <li><a href="{% url 'office:office_view' office.company_id office.id %}">{{ office.name }} ({{ office.id }})</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No offices are available.</p>
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+    <h2>Links</h2>
     <ul>
-    {% for office in office_list %}
-        <li><a href="{% url 'office:office_view' office.company_id office.id %}">{{ office.name }} ({{ office.id }})</a></li>
-    {% endfor %}
+        <li><a href="{% url 'company:company_list' %}">Company list</a></li>
+        <li><a href="{% url 'company:company_new' %}">Company add</a></li>
+        <li><a href="{% url 'company:company_view' company.id %}">Company view</a></li>
+        <li><a href="{% url 'office:list' company.id %}">Office list</a></li>
+        <li><a href="{% url 'office:office_new' company.id %}">Office add</a></li>
     </ul>
-{% else %}
-    <p>No offices are available.</p>
-{% endif %}
-
-<h2>Links</h2>
-
-<ul>
-    <li><a href="{% url 'company:index' %}">Home</a></li>
-    <li><a href="{% url 'company:company_new' %}">Company add</a></li>
-    <li><a href="{% url 'company:list' %}">Company list</a></li>
-    <li><a href="{% url 'company:company_view' company.id %}">Company view</a>
-    <li><a href="{% url 'office:office_new' company.id %}">Company office add</a></li>
-    <li><a href="{% url 'office:list' company.id %}">Company office list</a>
-</ul>
+{% endblock %}

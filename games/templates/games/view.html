@@ -1,17 +1,28 @@
-<h1>Office game view</h1>
+{% extends 'base.html' %}
 
-<h2>Info</h2>
+{% block title %}
+    Office Battles | Game View
+{% endblock %}
 
-<ul>
-    <li>Name: {{ game.name }}</li>
-    <li>Mode: {{ game.get_mode_display }}</li>
-</ul>
+{% block header %}
+{% endblock %}
 
-<h2>Links</h2>
+{% block main %}
+    <h1>Game View</h1>
 
-<ul>
-    <li><a href="{% url 'office:add' office.company_id %}">Office add</a></li>
-    <li><a href="{% url 'office:list' office.company_id %}">Office list</a>
-    <li><a href="{% url 'game:add' office.company_id office.id %}">Office game add</a>
-    <li><a href="{% url 'game:list' office.company_id office.id %}">Office game list</a></li>
-</ul>
+    <h2>Info</h2>
+    <ul>
+        <li>Name: {{ game.name }}</li>
+        <li>Mode: {{ game.get_mode_display }}</li>
+    </ul>
+{% endblock %}
+
+{% block footer %}
+    <h2>Links</h2>
+    <ul>
+        <li><a href="{% url 'office:office_new' office.company_id %}">Office add</a></li>
+        <li><a href="{% url 'office:list' office.company_id %}">Office list</a>
+        <li><a href="{% url 'game:add' office.company_id office.id %}">Office game add</a>
+        <li><a href="{% url 'game:list' office.company_id office.id %}">Office game list</a></li>
+    </ul>
+{% endblock %}

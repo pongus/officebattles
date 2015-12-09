@@ -1,19 +1,33 @@
-{# {% extends 'base.html' %} #}
+{% extends 'base.html' %}
 
-{% block logo %}
+{% block title %}
+    {{ company.name }} Battles | Company Logo
+{% endblock %}
+
+{% block header %}
     {% if company_logo %}
-        <h1>{{ company.name }} Battles</h1>
-        <img src="{{ company_logo.logo.url }}" alt="{{ company.name }} Logo">
+        <span>{{ company.name }} Battles</span>
+        <img src="{{ company_logo.logo.url }}" alt="{{ company.name }} Logo" class="logo">
     {% else %}
-        <h1>Office Battles</h1>
+        <span>Office Battles</span>
     {% endif %}
 {% endblock %}
 
-{% block content %}
-    <h2>Upload logo</h2>
+{% block main %}
+    <h1>Company Logo</h1>
 
     <form method="post" enctype="multipart/form-data">{% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Upload" />
+        <input type="submit" value="Upload logo" />
     </form>
+{% endblock %}
+
+{% block footer %}
+    <h2>Links</h2>
+    <ul>
+        <li><a href="{% url 'company:company_list' %}">Company list</a></li>
+        <li><a href="{% url 'company:company_new' %}">Company add</a></li>
+        <li><a href="{% url 'office:list' company.id %}">Office list</a>
+        <li><a href="{% url 'office:office_new' company.id %}">Office add</a></li>
+    </ul>
 {% endblock %}

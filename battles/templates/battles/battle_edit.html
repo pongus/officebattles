@@ -1,6 +1,20 @@
-<h1>Battle new/edit</h1>
+{% extends 'base.html' %}
 
-<form method="POST">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save" />
-</form>
+{% block title %}
+    Office Battles | Battle New/Edit
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block main %}
+    <h1>Battle New/Edit</h1>
+
+    <form method="POST">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Save" />
+    </form>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
