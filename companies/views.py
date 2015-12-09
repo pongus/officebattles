@@ -30,6 +30,7 @@ def company_new(request):
 
 def company_edit(request, company_id):
     company = get_object_or_404(Company, pk=company_id)
+    company_logo = Logo.objects.filter(company_id=company_id).order_by('-updated').first()
 
     if (request.method == 'POST'):
         form = CompanyForm(request.POST, instance=company)
@@ -42,16 +43,21 @@ def company_edit(request, company_id):
     else:
         form = CompanyForm(instance=company)
 
-    return render(request, 'companies/company_edit.html', {'form': form})
+    context = {
+        'form': form,
+        'company_logo': company_logo
+    }
+
+    return render(request, 'companies/company_edit.html', context)
 
 
 def company_view(request, company_id):
     company = get_object_or_404(Company, pk=company_id)
-    latest_logo = Logo.objects.filter(company_id=company_id).order_by('-updated').first()
+    company_logo = Logo.objects.filter(company_id=company_id).order_by('-updated').first()
 
     context = {
         'company': company,
-        'latest_logo': latest_logo,
+        'company_logo': company_logo
     }
 
     return render(request, 'companies/company_view.html', context)
@@ -59,6 +65,7 @@ def company_view(request, company_id):
 
 def logo_upload(request, company_id):
     company = get_object_or_404(Company, pk=company_id)
+    company_logo = Logo.objects.filter(company_id=company_id).order_by('-updated').first()
 
     if request.method == 'POST':
         form = LogoForm(request.POST, request.FILES)
@@ -70,4 +77,9 @@ def logo_upload(request, company_id):
     else:
         form = LogoForm()
 
-    return render(request, 'companies/logo_upload.html', {'form': form})
+    context = {
+        'form': form,
+        'company_logo': company_logo
+    }
+
+    return render(request, 'companies/logo_upload.html', context)

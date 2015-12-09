@@ -1,5 +1,16 @@
+{# {% extends 'base.html' %} #}
+
+{% block logo %}
+    {% if company_logo %}
+        <h1>{{ company.name }} Battles</h1>
+        <img src="{{ company_logo.logo.url }}" alt="{{ company.name }} Logo">
+    {% else %}
+        <h1>Office Battles</h1>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
-    <h1>Upload logo</h1>
+    <h2>Upload logo</h2>
 
     <form method="post" enctype="multipart/form-data">{% csrf_token %}
         {{ form.as_p }}

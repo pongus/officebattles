@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
 
 {% block logo %}
-    {% if latest_logo %}
-        <img src="{{ latest_logo.logo.url }}" alt="{{ company.name }}">
+    {% if company_logo %}
+        <h1>{{ company.name }} Battles</h1>
+        <img src="{{ company_logo.logo.url }}" alt="{{ company.name }} Logo">
+    {% else %}
+        <h1>Office Battles</h1>
     {% endif %}
 {% endblock %}
 
 {% block main %}
-    <h1>Company view</h1>
+    <h2>Company view</h2>
 
     <h2>Company name: {{ company.name }}</h2>
 
