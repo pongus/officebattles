@@ -4,8 +4,7 @@ from .forms import CompanyForm, LogoForm
 
 
 def company_list(request):
-    company_list = Company.objects.order_by('-updated')
-    context = {'company_list': company_list}
+    context = {'company_list': Company.list}
 
     return render(request, 'companies/company_list.html', context)
 
@@ -18,7 +17,9 @@ def company_new(request):
             company = form.save(commit=False)
             company.save()
             form.save_m2m()
-            return render(request, 'companies/company_view.html', {'company': company})
+            context = {'company': company}
+
+            return render(request, 'companies/company_view.html', context)
     else:
         form = CompanyForm()
 
@@ -35,7 +36,9 @@ def company_edit(request, company_id):
             company = form.save(commit=False)
             company.save()
             form.save_m2m()
-            return render(request, 'companies/company_view.html', {'company': company})
+            context = {'company': company}
+
+            return render(request, 'companies/company_view.html', context)
     else:
         form = CompanyForm(instance=company)
 
@@ -69,7 +72,9 @@ def logo_upload(request, company_id):
             form = Logo(logo=request.FILES['logo'])
             form.company_id = company_id
             form.save()
-            return render(request, 'companies/company_view.html', {'company': company})
+            context = {'company': company}
+
+            return render(request, 'companies/company_view.html', context)
     else:
         form = LogoForm()
 

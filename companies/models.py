@@ -9,6 +9,10 @@ class Company(models.Model):
     def __str__(self):
         return self.name
 
+    @classmethod
+    def list(cls):
+        return cls.objects.order_by('-updated')
+
 
 class Logo(models.Model):
     company = models.ForeignKey('companies.Company')
