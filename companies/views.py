@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Company, Logo
 from .forms import CompanyForm, LogoForm
+from offices.forms import OfficeForm
 
 
 def company_list(request):
@@ -17,6 +18,14 @@ def company_new(request):
             company = form.save(commit=False)
             company.save()
             form.save_m2m()
+
+            # Auto-create a default office
+            office_form = OfficeForm()
+            office = office_form.save(commit=False)
+            office.company_id = company.id
+            office.name = 'Default'
+            office.save()
+
             context = {'company': company}
 
             return render(request, 'companies/company_view.html', context)
