@@ -1,1 +1,35 @@
-{# Footer #}
+<div class="footer__links">
+    <h2>Links</h2>
+
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="{% url 'company:company_list' %}">Company list</a></li>
+        <li><a href="{% url 'company:company_new' %}">Company add</a></li>
+
+        {% if company %}
+            <li><a href="{% url 'company:company_view' company.id %}">Company view</a></li>
+            <li><a href="{% url 'company:company_edit' company.id %}">Company edit</a></li>
+            <li><a href="{% url 'company:logo_upload' company.id %}">Company logo</a></li>
+            <li><a href="{% url 'office:office_list' company.id %}">Office list</a>
+            <li><a href="{% url 'office:office_new' company.id %}">Office add</a></li>
+        {% endif %}
+
+        {% if office %}
+            <li><a href="{% url 'office:office_view' office.company_id office.id %}">Office view</a></li>
+            <li><a href="{% url 'game:list' office.company_id office.id %}">Game list</a></li>
+            <li><a href="{% url 'game:add' office.company_id office.id %}">Game add</a></li>
+        {% endif %}
+
+        {% if game %}
+            {# Links where 'game' object is required here #}
+        {% endif %}
+
+        {% if battle %}
+            <li><a href="{% url 'battle:battle_edit' battle_id=battle.pk %}">Battle edit</a></li>
+        {% endif %}
+
+        {% if result %}
+            {# Links where 'result' object is required here #}
+        {% endif %}
+    </ul>
+</div>

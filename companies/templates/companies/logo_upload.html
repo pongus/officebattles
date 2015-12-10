@@ -18,11 +18,5 @@
 {% endblock %}
 
 {% block footer %}
-    <h2>Links</h2>
-    <ul>
-        <li><a href="{% url 'company:company_list' %}">Company list</a></li>
-        <li><a href="{% url 'company:company_new' %}">Company add</a></li>
-        <li><a href="{% url 'office:list' company.id %}">Office list</a>
-        <li><a href="{% url 'office:office_new' company.id %}">Office add</a></li>
-    </ul>
+    {% include "footer.html" with company=company %}
 {% endblock %}

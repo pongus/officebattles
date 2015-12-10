@@ -27,8 +27,5 @@
 {% endblock %}
 
 {% block footer %}
-    <h2>Links</h2>
-    <ul>
-        <li><a href="{% url 'company:company_new' %}">Company add</a></li>
-    </ul>
+    {% include "footer.html" with company=company %}
 {% endblock %}

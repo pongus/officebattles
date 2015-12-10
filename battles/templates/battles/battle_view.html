@@ -24,8 +24,5 @@
 {% endblock %}
 
 {% block footer %}
-    <h2>Links</h2>
-    <ul>
-        <li><a href="{% url 'battle:battle_edit' battle_id=battle.pk %}">Edit battle</a></li>
-    </ul>
+    {% include "footer.html" with company=company office=office battle=battle %}
 {% endblock %}

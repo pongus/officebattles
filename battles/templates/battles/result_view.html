@@ -8,8 +8,9 @@
 {% endblock %}
 
 {% block main %}
-    <h1>Result view</h1>
+    <h1>Result View</h1>
 {% endblock %}
 
 {% block footer %}
+    {% include "footer.html" with company=company office=office %}
 {% endblock %}
