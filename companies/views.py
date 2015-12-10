@@ -45,6 +45,7 @@ def company_edit(request, company_id):
             company = form.save(commit=False)
             company.save()
             form.save_m2m()
+
             context = {'company': company}
 
             return render(request, 'companies/company_view.html', context)
@@ -81,6 +82,7 @@ def logo_upload(request, company_id):
             form = Logo(logo=request.FILES['logo'])
             form.company_id = company_id
             form.save()
+
             context = {'company': company}
 
             return render(request, 'companies/company_view.html', context)

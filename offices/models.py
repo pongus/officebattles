@@ -9,3 +9,7 @@ class Office(models.Model):
 
     def __str__(self):
         return self.name
+
+    @classmethod
+    def list(cls, company_id):
+        return cls.objects.filter(company_id=company_id).order_by('-updated')
