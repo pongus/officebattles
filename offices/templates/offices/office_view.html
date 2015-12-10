@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block header %}
+    {% include "header.html" with company=company company_logo=company_logo %}
 {% endblock %}
 
 {% block main %}
@@ -19,7 +20,7 @@
         <li><a href="{% url 'company:company_list' %}">Company list</a></li>
         <li><a href="{% url 'company:company_new' %}">Company add</a></li>
         <li><a href="{% url 'company:company_view' office.company_id %}">Company view</a></li>
-        <li><a href="{% url 'office:list' office.company_id %}">Office list</a></li>
+        <li><a href="{% url 'office:office_list' office.company_id %}">Office list</a></li>
         <li><a href="{% url 'office:office_new' office.company_id %}">Office add</a></li>
         <li><a href="{% url 'game:list' office.company_id office.id %}">Game list</a></li>
         <li><a href="{% url 'game:add' office.company_id office.id %}">Game add</a></li>
