@@ -1,6 +1,7 @@
-{% if company_logo %}
-    <span>{{ company.name }} Battles</span>
-    <img src="{{ company_logo.logo.url }}" alt="{{ company.name }} Logo" class="logo">
-{% else %}
-    <span>Office Battles</span>
-{% endif %}
+<div class="header__name">
+    <span>{{ company.name|default:'Office' }} Battles</span>
+</div>
+
+<div class="header__logo">
+    <img src="{{ company_logo.logo.url|default:'https://placeholdit.imgix.net/~text?txtsize=33&txt=Logo&w=350&h=150' }}" alt="{{ company.name|default:'Office Battles' }} Logo" class="logo">
+</div>
