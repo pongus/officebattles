@@ -27,7 +27,6 @@ def company_new(request):
 
 def company_edit(request, company_id):
     company = get_object_or_404(Company, pk=company_id)
-    company_logo = Logo.objects.filter(company_id=company_id).order_by('-updated').first()
 
     if (request.method == 'POST'):
         form = CompanyForm(request.POST, instance=company)
@@ -42,7 +41,7 @@ def company_edit(request, company_id):
 
     context = {
         'company': company,
-        'company_logo': company_logo,
+        'company_logo': Logo.latest(company_id),
         'form': form
     }
 
@@ -51,11 +50,10 @@ def company_edit(request, company_id):
 
 def company_view(request, company_id):
     company = get_object_or_404(Company, pk=company_id)
-    company_logo = Logo.objects.filter(company_id=company_id).order_by('-updated').first()
 
     context = {
         'company': company,
-        'company_logo': company_logo
+        'company_logo': Logo.latest(company_id)
     }
 
     return render(request, 'companies/company_view.html', context)
@@ -63,7 +61,6 @@ def company_view(request, company_id):
 
 def logo_upload(request, company_id):
     company = get_object_or_404(Company, pk=company_id)
-    company_logo = Logo.objects.filter(company_id=company_id).order_by('-updated').first()
 
     if request.method == 'POST':
         form = LogoForm(request.POST, request.FILES)
@@ -78,7 +75,7 @@ def logo_upload(request, company_id):
 
     context = {
         'company': company,
-        'company_logo': company_logo,
+        'company_logo': Logo.latest(company_id),
         'form': form
     }
 

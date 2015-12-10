@@ -1,1 +1,6 @@
-{# Header #}
+{% if company_logo %}
+    <span>{{ company.name }} Battles</span>
+    <img src="{{ company_logo.logo.url }}" alt="{{ company.name }} Logo" class="logo">
+{% else %}
+    <span>Office Battles</span>
+{% endif %}

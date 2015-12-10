@@ -18,3 +18,7 @@ class Logo(models.Model):
 
     def __str__(self):
         return self.logo
+
+    @classmethod
+    def latest(cls, company_id):
+        return cls.objects.filter(company_id=company_id).order_by('-updated').first()

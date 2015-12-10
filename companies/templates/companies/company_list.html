@@ -5,12 +5,7 @@
 {% endblock %}
 
 {% block header %}
-    {% if company_logo %}
-        <span>{{ company.name }} Battles</span>
-        <img src="{{ company_logo.logo.url }}" alt="{{ company.name }} Logo" class="logo">
-    {% else %}
-        <span>Office Battles</span>
-    {% endif %}
+    {% include "header.html" with company=company company_logo=company_logo %}
 {% endblock %}
 
 {% block main %}
@@ -21,7 +16,8 @@
         {% for company in company_list %}
             <li>
                 <a href="{% url 'company:company_view' company.id %}">{{ company.name }} ({{ company.id }})</a>
-                <a href="{% url 'company:company_edit' company.id %}"> - Edit</a>
+                -
+                <a href="{% url 'company:company_edit' company.id %}">Edit</a>
             </li>
         {% endfor %}
         </ul>
