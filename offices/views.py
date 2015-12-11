@@ -52,3 +52,8 @@ def office_view(request, company_id, office_id):
     }
 
     return render(request, 'offices/office_view.html', context)
+
+def office_delete(request, office_id):
+   office = Office.objects.get(pk = office_id)
+   office.delete()
+   return render(request, 'companies/company_view.html')

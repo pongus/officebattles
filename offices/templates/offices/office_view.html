@@ -12,6 +12,7 @@
     <h1>Office View</h1>
 
     <span>Office name: {{ office.name }}</span>
+    <a href="{% url 'office:office_delete' office.id %}">Delete</a>
 {% endblock %}
 
 {% block footer %}
