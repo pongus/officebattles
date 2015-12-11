@@ -45,13 +45,10 @@ def office_new(request, company_id):
 
 
 def office_view(request, company_id, office_id):
-    company = get_object_or_404(Company, pk=company_id)
-    office = get_object_or_404(Office, pk=office_id)
-
     context = {
-        'company': company,
+        'company': get_object_or_404(Company, pk=company_id),
         'company_logo': Logo.latest(company_id),
-        'office': office
+        'office': get_object_or_404(Office, pk=office_id)
     }
 
     return render(request, 'offices/office_view.html', context)

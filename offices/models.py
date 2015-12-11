@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
 class Office(models.Model):
     company = models.ForeignKey('companies.Company')
     name = models.CharField(max_length=128)
