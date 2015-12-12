@@ -12,7 +12,9 @@ def battle_new(request):
             battle.save()
             form.save_m2m()
 
-            return render(request, 'battles/battle_view.html', {'battle': battle})
+            context = {'battle': battle}
+
+            return render(request, 'battles/battle_view.html', context)
     else:
         form = BattleForm()
 
@@ -30,7 +32,9 @@ def battle_edit(request, battle_id):
             battle.save()
             form.save_m2m()
 
-            return render(request, 'battles/battle_view.html', {'battle': battle})
+            context = {'battle': battle}
+
+            return render(request, 'battles/battle_view.html', context)
     else:
         form = BattleForm(instance=battle)
 
@@ -53,8 +57,9 @@ def result_new(request, battle_id):
             result.save()
             form.save_m2m()
 
-            return render(request, 'battles/result_view.html', {'result': result})
+            context = {'result': result}
 
+            return render(request, 'battles/result_view.html', context)
     else:
         form = ResultForm()
 
@@ -73,8 +78,9 @@ def result_edit(request, battle_id, result_id):
             result.save()
             form.save_m2m()
 
-            return render(request, 'battles/result_view.html', {'result': result})
+            context = {'result': result}
 
+            return render(request, 'battles/result_view.html', context)
     else:
         form = ResultForm(instance=result)
 
