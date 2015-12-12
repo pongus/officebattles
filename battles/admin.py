@@ -3,10 +3,10 @@ from .models import Battle, Result
 
 
 class BattleAdmin(admin.ModelAdmin):
-    fields = ['game', 'players']
+    fields = ['game']
     list_display = ('game', 'created', 'updated')
-    list_filter = ['game', 'players', 'created', 'updated']
-    search_fields = ['game', 'players']
+    list_filter = ['game', 'created', 'updated']
+    search_fields = ['game']
 
 admin.site.register(Battle, BattleAdmin)
 

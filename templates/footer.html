@@ -9,6 +9,7 @@
         {% if company %}
             <li><a href="{% url 'company:company_view' company.id %}">Company view</a></li>
             <li><a href="{% url 'company:company_edit' company.id %}">Company edit</a></li>
+            <li>Company delete</li>
             <li><a href="{% url 'company:logo_upload' company.id %}">Company logo</a></li>
             <li><a href="{% url 'office:office_list' company.id %}">Office list</a>
             <li><a href="{% url 'office:office_new' company.id %}">Office add</a></li>
@@ -16,6 +17,8 @@
 
         {% if office %}
             <li><a href="{% url 'office:office_view' office.company_id office.id %}">Office view</a></li>
+            <li>Office edit</li>
+            <li><a href="{% url 'office:office_delete' office.id %}">Office delete</a></li>
             <li><a href="{% url 'game:list' office.company_id office.id %}">Game list</a></li>
             <li><a href="{% url 'game:add' office.company_id office.id %}">Game add</a></li>
         {% endif %}
