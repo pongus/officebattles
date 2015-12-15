@@ -72,6 +72,14 @@ def company_view(request, company_id):
     return render(request, 'companies/company_view.html', context)
 
 
+def company_delete(request, company_id):
+   company = Company.objects.get(pk = company_id)
+   company.delete()
+   context = {'company_list': Company.list}
+
+   return render(request, 'companies/company_list.html', context)
+
+
 def logo_upload(request, company_id):
     company = get_object_or_404(Company, pk=company_id)
 
