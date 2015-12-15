@@ -11,7 +11,22 @@
     <h1>Battle New/Edit</h1>
 
     <form method="POST">{% csrf_token %}
-        {{ form.as_p }}
+        {{ battle_form.as_p }}
+
+        {% if players %}
+            {% for player in players %}
+                <input type="checkbox" name="players" id="player-{{ player.id }}" value="{{ player.id }}">
+                <label for="player-{{ player.id }}">
+                   {% if player.first_name and player.last_name %}
+                        {{ player.first_name }}
+                        {{ player.last_name }}
+                    {% else %}
+                        {{ player.username }}
+                    {% endif %}
+                </label><br>
+            {% endfor %}
+        {% endif %}
+
         <input type="submit" value="Save" />
     </form>
 {% endblock %}

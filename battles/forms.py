@@ -11,4 +11,4 @@ class BattleForm(forms.ModelForm):
 class ResultForm(forms.ModelForm):
     class Meta:
         model = Result
-        fields = ['player', 'rank', 'score']
+        fields = ['player', 'score']

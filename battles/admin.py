@@ -3,17 +3,17 @@ from .models import Battle, Result
 
 
 class BattleAdmin(admin.ModelAdmin):
-    fields = ['game']
-    list_display = ('game', 'created', 'updated')
-    list_filter = ['game', 'created', 'updated']
+    fields = ['game', 'completed']
+    list_display = ('game', 'completed', 'created', 'updated')
+    list_filter = ['game', 'completed', 'created', 'updated']
     search_fields = ['game']
 
 admin.site.register(Battle, BattleAdmin)
 
 
 class ResultAdmin(admin.ModelAdmin):
-    fields = ['battle', 'player', 'rank', 'score']
-    list_display = ('battle', 'player', 'rank', 'score', 'created', 'updated')
+    fields = ['battle', 'player', 'score']
+    list_display = ('battle', 'player', 'score', 'created', 'updated')
     list_filter = ['battle', 'player', 'created', 'updated']
     search_fields = ['battle', 'player']
 

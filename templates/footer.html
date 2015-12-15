@@ -4,7 +4,7 @@
     <ul>
         <li><a href="/">Home</a></li>
         <li><a href="{% url 'company:company_list' %}">Company list</a></li>
-        <li><a href="{% url 'company:company_new' %}">Company add</a></li>
+        <li><a href="{% url 'company:company_new' %}">Company new</a></li>
 
         {% if company %}
             <li><a href="{% url 'company:company_view' company.id %}">Company view</a></li>
@@ -12,7 +12,7 @@
             <li>Company delete</li>
             <li><a href="{% url 'company:logo_upload' company.id %}">Company logo</a></li>
             <li><a href="{% url 'office:office_list' company.id %}">Office list</a>
-            <li><a href="{% url 'office:office_new' company.id %}">Office add</a></li>
+            <li><a href="{% url 'office:office_new' company.id %}">Office new</a></li>
         {% endif %}
 
         {% if office %}
@@ -20,12 +20,14 @@
             <li>Office edit</li>
             <li><a href="{% url 'office:office_delete' office.id %}">Office delete</a></li>
             <li><a href="{% url 'game:list' office.company_id office.id %}">Game list</a></li>
-            <li><a href="{% url 'game:add' office.company_id office.id %}">Game add</a></li>
+            <li><a href="{% url 'game:add' office.company_id office.id %}">Game new</a></li>
         {% endif %}
 
         {% if game %}
             {# Links where 'game' object is required here #}
         {% endif %}
+
+        <li><a href="{% url 'battle:battle_new' %}">Battle new</a></li>
 
         {% if battle %}
             <li><a href="{% url 'battle:battle_edit' battle_id=battle.pk %}">Battle edit</a></li>

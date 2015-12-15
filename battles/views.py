@@ -1,24 +1,39 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.models import User
 from .models import Battle, Result
 from .forms import BattleForm, ResultForm
 
 
 def battle_new(request):
-    if request.method == 'POST':
-        form = BattleForm(request.POST)
+    result_form = ResultForm()
 
-        if form.is_valid():
-            battle = form.save(commit=False)
+    if request.method == 'POST':
+        battle_form = BattleForm(request.POST)
+
+        if battle_form.is_valid():
+            battle = battle_form.save(commit=False)
             battle.save()
-            form.save_m2m()
+
+            players = request.POST.getlist('players')
+            for player in players:
+                result = result_form.save(commit=False)
+                result.player_id = player
+                result.battle_id = battle.id
+                result.save()
 
             context = {'battle': battle}
 
-            return render(request, 'battles/battle_view.html', context)
+            return render(request, 'battles/result_edit.html', context)
     else:
-        form = BattleForm()
+        battle_form = BattleForm()
 
-    return render(request, 'battles/battle_edit.html', {'form': form})
+    context = {
+        'players': User.objects.all(),
+        'battle_form': battle_form,
+        'result_form': result_form
+    }
+
+    return render(request, 'battles/battle_edit.html', context)
 
 
 def battle_edit(request, battle_id):
@@ -38,7 +53,12 @@ def battle_edit(request, battle_id):
     else:
         form = BattleForm(instance=battle)
 
-    return render(request, 'battles/battle_edit.html', {'form': form})
+    context = {
+        'players': User.objects.all(),
+        'form': form
+    }
+
+    return render(request, 'battles/battle_edit.html', context)
 
 
 def battle_view(request, battle_id):
