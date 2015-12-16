@@ -5,8 +5,6 @@ from .forms import BattleForm, ResultForm
 
 
 def battle_new(request):
-    result_form = ResultForm()
-
     if request.method == 'POST':
         battle_form = BattleForm(request.POST)
 
@@ -16,7 +14,7 @@ def battle_new(request):
 
             players = request.POST.getlist('players')
             for player in players:
-                result = result_form.save(commit=False)
+                result = ResultForm().save(commit=False)
                 result.player_id = player
                 result.battle_id = battle.id
                 result.save()
@@ -29,8 +27,7 @@ def battle_new(request):
 
     context = {
         'players': User.objects.all(),
-        'battle_form': battle_form,
-        'result_form': result_form
+        'battle_form': battle_form
     }
 
     return render(request, 'battles/battle_edit.html', context)
