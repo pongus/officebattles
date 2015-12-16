@@ -19,7 +19,10 @@ def battle_new(request):
                 result.battle_id = battle.id
                 result.save()
 
-            context = {'battle': battle}
+            context = {
+                'battle': battle,
+                'results': Result.objects.filter(battle_id=battle.id)
+            }
 
             return render(request, 'battles/result_edit.html', context)
     else:
@@ -66,17 +69,17 @@ def battle_view(request, battle_id):
 
 def result_new(request, battle_id):
     if request.method == 'POST':
-        form = ResultForm(request.POST)
+        scores = request.POST.getlist('scores')
+        for score in scores:
+            form = ResultForm(request.POST).save(commit=False)
+            form.battle_id = 1
+            form.player_id = 1
+            form.score = score
+            form.save()
 
-        if form.is_valid():
-            result = form.save(commit=False)
-            result.battle_id = battle_id
-            result.save()
-            form.save_m2m()
+        context = {'form': form}
 
-            context = {'result': result}
-
-            return render(request, 'battles/result_view.html', context)
+        return render(request, 'battles/result_view.html', context)
     else:
         form = ResultForm()
 

@@ -30,7 +30,7 @@
         <li><a href="{% url 'battle:battle_new' %}">Battle new</a></li>
 
         {% if battle %}
-            <li><a href="{% url 'battle:battle_edit' battle_id=battle.pk %}">Battle edit</a></li>
+            {# Links where 'battle' object is required here #}
         {% endif %}
 
         {% if result %}
