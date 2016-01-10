@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth.models import User
 from .models import Battle, Result
 from .forms import BattleForm, ResultForm
@@ -86,6 +86,23 @@ def result_new(request, battle_id):
     return render(request, 'battles/result_edit.html', {'form': form})
 
 
+def result_save(request, battle_id):
+    if request.method == 'POST':
+        current_battle = Result.objects.filter(battle_id=battle_id)
+
+        for player_id in request.POST:
+            if player_id.isdigit():
+                result = get_object_or_404(current_battle, player_id=player_id)
+                result.score = request.POST[player_id]
+                result.save()
+
+        battle = get_object_or_404(Battle, pk=battle_id)
+        battle.completed = True
+        battle.save()
+
+    return HttpResponseRedirect('/battle/' + battle_id + '/result/view/')
+
+
 def result_edit(request, battle_id, result_id):
     result = get_object_or_404(Result, pk=result_id)
 
@@ -107,7 +124,7 @@ def result_edit(request, battle_id, result_id):
     return render(request, 'battles/result_edit.html', {'form': form})
 
 
-def result_view(request, battle_id, result_id):
-    result = get_object_or_404(Result, pk=result_id)
+def result_view(request, battle_id):
+    battle = get_object_or_404(Battle, pk=battle_id)
 
-    return render(request, 'battles/result_view.html', {'result': result})
+    return render(request, 'battles/result_view.html', {'battle': battle})

@@ -10,6 +10,13 @@
 
 {% block main %}
     <h1>Result View</h1>
+
+    <h2>Battle</h2>
+    <ul>
+        <li>Battle ID: #{{ battle.id }}</li>
+        <li>Game ID: #{{ battle.game_id }}</li>
+        <li>Completed: {{ battle.completed }}</li>
+    </ul>
 {% endblock %}
 
 {% block footer %}
