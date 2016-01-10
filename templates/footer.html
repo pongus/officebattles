@@ -27,6 +27,7 @@
             {# Links where 'game' object is required here #}
         {% endif %}
 
+        <li><a href="{% url 'battle:battle_list' %}">Battle list</a></li>
         <li><a href="{% url 'battle:battle_new' %}">Battle new</a></li>
 
         {% if battle %}

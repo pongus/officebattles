@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Office Battles | Result List
+{% endblock %}
+
+{% block header %}
+    {% include "header.html" with company=company company_logo=company_logo %}
+{% endblock %}
+
+{% block main %}
+    <h1>Result List</h1>
+
+    <h2>Battles</h2>
+    {% if battles %}
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Game</th>
+                <th>Home</th>
+                <th>Away</th>
+                <th>Result</th>
+            </tr>
+            {% for battle in battles %}
+                <tr>
+                    <td>{{ battle.updated }}</td>
+                    <td>{{ battle.game }}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No battles are available.</p>
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+    {% include "footer.html" with battle=battle %}
+{% endblock %}

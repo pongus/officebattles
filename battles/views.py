@@ -4,6 +4,19 @@ from .models import Battle, Result
 from .forms import BattleForm, ResultForm
 
 
+def battle_list(request):
+    battles = Battle.objects.filter(completed=True).order_by('-updated')
+
+    context = {
+        'battles': battles
+        # Home Team / Player 1 name(s)
+        # Away Team / Player 2 name(s)
+        # Score home - away
+    }
+
+    return render(request, 'battles/battle_list.html', context)
+
+
 def battle_new(request):
     if request.method == 'POST':
         battle_form = BattleForm(request.POST)
@@ -100,7 +113,7 @@ def result_save(request, battle_id):
         battle.completed = True
         battle.save()
 
-    return HttpResponseRedirect('/battle/' + battle_id + '/result/view/')
+    return HttpResponseRedirect('/battle/list/')
 
 
 def result_edit(request, battle_id, result_id):
