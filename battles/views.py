@@ -156,6 +156,7 @@ def battle_select_game(request):
             battle.save()
 
             context = {
+                'battle_id': battle.id,
                 # TODO: Add filter for same company and same game
                 'players': User.objects.all()
             }
@@ -173,7 +174,25 @@ def battle_select_game(request):
 
 # Step 2 - Select players
 def battle_select_players(request, battle_id):
-    return True
+    if request.method == 'POST':
+        players = request.POST.getlist('players')
+        for player in players:
+            result = ResultForm().save(commit=False)
+            result.battle_id = battle_id
+            result.player_id = player
+            result.save()
+
+        context = {
+            'results': Result.objects.filter(battle_id=battle_id)
+        }
+
+        return render(request, 'battles/battle_add_result.html', context)
+
+    context = {
+        'players': User.objects.all()
+    }
+
+    return render(request, 'battles/battle_select_players.html', context)
 
 
 # Step 3 - Add result
