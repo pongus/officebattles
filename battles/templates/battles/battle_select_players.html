@@ -1,0 +1,23 @@
+{% block main %}
+    <h1>Step 2: Select Players</h1>
+
+    <form method="POST">{% csrf_token %}
+        {% if players %}
+            {% for player in players %}
+                <input type="checkbox" name="players" id="player-{{ player.id }}" value="{{ player.id }}">
+                <label for="player-{{ player.id }}">
+                   {% if player.first_name and player.last_name %}
+                        {{ player.first_name }}
+                        {{ player.last_name }}
+                    {% else %}
+                        {{ player.username }}
+                    {% endif %}
+                </label><br>
+            {% endfor %}
+        {% else %}
+            <p>There are no players available.</p>
+        {% endif %}
+
+        <input type="submit" value="Save" />
+    </form>
+{% endblock %}

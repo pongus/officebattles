@@ -141,3 +141,46 @@ def result_view(request, battle_id):
     battle = get_object_or_404(Battle, pk=battle_id)
 
     return render(request, 'battles/result_view.html', {'battle': battle})
+
+
+# Start of a possibly new user flow below, not even close to be ready yet!
+
+
+# Step 1 - Select game
+def battle_select_game(request):
+    if request.method == 'POST':
+        battle_form = BattleForm(request.POST)
+
+        if battle_form.is_valid():
+            battle = battle_form.save(commit=False)
+            battle.save()
+
+            context = {
+                # TODO: Add filter for same company and same game
+                'players': User.objects.all()
+            }
+
+            return render(request, 'battles/battle_select_players.html', context)
+    else:
+        battle_form = BattleForm()
+
+    context = {
+        'battle_form': battle_form
+    }
+
+    return render(request, 'battles/battle_select_game.html', context)
+
+
+# Step 2 - Select players
+def battle_select_players(request, battle_id):
+    return True
+
+
+# Step 3 - Add result
+def battle_add_result(request, battle_id):
+    return True
+
+
+# Step 4 - Save
+def battle_save(request, battle_id):
+    return True
