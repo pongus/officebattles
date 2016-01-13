@@ -1,7 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth.models import User
-from .models import Battle, Result
-from .forms import BattleForm, ResultForm
+from battles.models import Battle, Result
+from battles.forms import BattleForm, ResultForm
+from games.models import Game
+import random
 
 
 def battle_list(request):
@@ -25,11 +27,18 @@ def battle_new(request):
             battle = battle_form.save(commit=False)
             battle.save()
 
-            players = request.POST.getlist('players')
-            for player in players:
+            game = get_object_or_404(Game, pk=battle.game_id)
+            player_ids = request.POST.getlist('players')
+            random_id = random.choice(player_ids)
+
+            for player_id in player_ids:
                 result = ResultForm().save(commit=False)
-                result.player_id = player
+                result.player_id = player_id
                 result.battle_id = battle.id
+
+                if game.coin_toss and player_id == random_id:
+                    result.coin = True
+
                 result.save()
 
             context = {

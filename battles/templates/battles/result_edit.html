@@ -11,17 +11,10 @@
 {% block main %}
     <h1>Result New/Edit</h1>
 
-    <h2>Battle</h2>
-    <ul>
-        <li>Battle ID: #{{ battle.id }}</li>
-        <li>Game ID: #{{ battle.game_id }}</li>
-        <li>Completed: {{ battle.completed }}</li>
-    </ul>
-
     <h2>Results</h2>
     <form action="{% url 'battle:result_save' battle.id %}" method="POST">{% csrf_token %}
         {% for result in results %}
-            <label for="player-{{ result.player_id }}">Player {{ result.player_id }}</label>
+            <label for="player-{{ result.player_id }}">{{ result.player }}</label>
             <input id="player-{{ result.player_id }}" type="number" name="{{ result.player_id }}" min="0" value="{{ result.score }}" required>
             <br>
         {% endfor %}

@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
 GAME_MODES = (
     (0, '1V1'),
     (1, '2V2'),
@@ -10,12 +10,14 @@ GAME_MODES = (
     (5, 'FFA'),
 )
 
+
 class Game(models.Model):
     office = models.ForeignKey('offices.Office')
     name = models.CharField(max_length=128)
     mode = models.PositiveSmallIntegerField(choices=GAME_MODES, default=0)
-    min_players = models.PositiveSmallIntegerField(null=True, blank=True, help_text="Only needed if game mode 'Free For All' is selected.")
-    max_players = models.PositiveSmallIntegerField(null=True, blank=True, help_text="Only needed if game mode 'Free For All' is selected.")
+    min_players = models.PositiveSmallIntegerField(null=True, blank=True, help_text="If game mode 'Free For All' is selected.")
+    max_players = models.PositiveSmallIntegerField(null=True, blank=True, help_text="If game mode 'Free For All' is selected.")
+    coin_toss = models.BooleanField(default=False, help_text="Enable coin toss to make it easier to decide start player, etc.")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
