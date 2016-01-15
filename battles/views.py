@@ -32,7 +32,7 @@ def battle_new(request):
                 result.battle_id = battle.id
                 result.player_id = player_id
 
-                if game.coin_toss and player_id == random_id:
+                if game.has_coin_toss and player_id == random_id:
                     result.coin = True
 
                 result.save()
