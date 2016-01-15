@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Office Battles | Result List
+    Office Battles | Battle List
 {% endblock %}
 
 {% block header %}
@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block main %}
-    <h1>Result List</h1>
+    <h1>Battle List</h1>
 
     <h2>Battles</h2>
     {% if battles %}
@@ -17,17 +17,27 @@
             <tr>
                 <th>Date</th>
                 <th>Game</th>
-                <th>Home</th>
-                <th>Away</th>
-                <th>Result</th>
+                <th>Players</th>
+                <th>Results</th>
             </tr>
             {% for battle in battles %}
                 <tr>
-                    <td>{{ battle.updated }}</td>
+                    <td>{{ battle.created }}</td>
                     <td>{{ battle.game }}</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
+                    <td>
+                        <ul>
+                            {% for result in battle.result_set.all %}
+                                <li>{{ result.player }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            {% for result in battle.result_set.all %}
+                                <li>{{ result.score }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
                 </tr>
             {% endfor %}
         </table>

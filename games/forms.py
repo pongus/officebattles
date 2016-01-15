@@ -14,4 +14,4 @@ GAME_MODES = (
 class AddGameForm(forms.Form):
     name = forms.CharField(label='Game name', max_length=128)
     mode = forms.ChoiceField(choices=GAME_MODES)
-    coin_toss = forms.BooleanField(label="Enable coin toss")
+    coin_toss = forms.BooleanField(label='Enable coin toss')

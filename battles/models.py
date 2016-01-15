@@ -13,7 +13,7 @@ class Battle(models.Model):
 
 
 class Result(models.Model):
-    battle = models.ForeignKey('battles.Battle')
+    battle = models.ForeignKey(Battle)
     player = models.ForeignKey(User)
     coin = models.BooleanField(default=False)
     score = models.IntegerField(null=True)

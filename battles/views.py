@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
+from django.shortcuts import render, render_to_response, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth.models import User
 from battles.models import Battle, Result
 from battles.forms import BattleForm, ResultForm
@@ -7,16 +7,13 @@ import random
 
 
 def battle_list(request):
-    battles = Battle.objects.filter(completed=True).order_by('-updated')
+    battles = Battle.objects.prefetch_related('result_set').filter(completed=True).order_by('-created')
 
     context = {
         'battles': battles
-        # Home Team / Player 1 name(s)
-        # Away Team / Player 2 name(s)
-        # Score home - away
     }
 
-    return render(request, 'battles/battle_list.html', context)
+    return render_to_response('battles/battle_list.html', context)
 
 
 def battle_new(request):
@@ -30,11 +27,10 @@ def battle_new(request):
             game = get_object_or_404(Game, pk=battle.game_id)
             player_ids = request.POST.getlist('players')
             random_id = random.choice(player_ids)
-
             for player_id in player_ids:
                 result = ResultForm().save(commit=False)
-                result.player_id = player_id
                 result.battle_id = battle.id
+                result.player_id = player_id
 
                 if game.coin_toss and player_id == random_id:
                     result.coin = True
