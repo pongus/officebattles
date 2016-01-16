@@ -3,5 +3,9 @@
 </div>
 
 <div class="header__logo">
-    <img src="{{ company_logo.logo.url|default:'https://placeholdit.imgix.net/~text?txtsize=33&txt=Logo&w=350&h=150' }}" alt="{{ company.name|default:'Office Battles' }} Logo" class="logo">
+    {% if company_logo %}
+        <img src="{{ company_logo.logo.url }}" alt="{{ company.name }} Logo" class="logo">
+    {% else %}
+        {# TODO: Show default logo if a custom logo does not exist. #}
+    {% endif %}
 </div>
