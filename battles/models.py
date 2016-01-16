@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 class Battle(models.Model):
     game = models.ForeignKey('games.Game')
+    best_of = models.PositiveIntegerField(null=True)
     completed = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -19,6 +20,7 @@ class Battle(models.Model):
 class Result(models.Model):
     battle = models.ForeignKey(Battle)
     player = models.ForeignKey(User)
+    round_no = models.PositiveIntegerField(null=True)
     score = models.IntegerField(null=True)
     is_home = models.NullBooleanField()
     has_coin = models.BooleanField(default=False)
