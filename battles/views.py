@@ -7,11 +7,7 @@ import random
 
 
 def battle_list(request):
-    battles = Battle.objects.prefetch_related('result_set').filter(completed=True).order_by('-created')
-
-    context = {
-        'battles': battles
-    }
+    context = {'battles': Battle.including_related_results()}
 
     return render_to_response('battles/battle_list.html', context)
 
@@ -26,14 +22,26 @@ def battle_new(request):
 
             game = get_object_or_404(Game, pk=battle.game_id)
             player_ids = request.POST.getlist('players')
-            random_id = random.choice(player_ids)
+            random_player_id = random.choice(player_ids)
+
+            counter = 0
             for player_id in player_ids:
+                counter += 1
+
                 result = ResultForm().save(commit=False)
                 result.battle_id = battle.id
                 result.player_id = player_id
 
-                if game.has_coin_toss and player_id == random_id:
-                    result.coin = True
+                # TODO: Decide how to do when there is more players than 1vs1
+                if counter == 1:
+                    result.is_home = True
+                elif counter == 2:
+                    result.is_home = False
+
+                if game.has_coin_toss and player_id == random_player_id:
+                    result.has_coin = True
+                else:
+                    result.has_coin = False
 
                 result.save()
 
@@ -170,9 +178,7 @@ def battle_select_game(request):
     else:
         battle_form = BattleForm()
 
-    context = {
-        'battle_form': battle_form
-    }
+    context = {'battle_form': battle_form}
 
     return render(request, 'battles/battle_select_game.html', context)
 
@@ -193,9 +199,7 @@ def battle_select_players(request, battle_id):
 
         return render(request, 'battles/battle_add_result.html', context)
 
-    context = {
-        'players': User.objects.all()
-    }
+    context = {'players': User.objects.all()}
 
     return render(request, 'battles/battle_select_players.html', context)
 

@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load filter_teams %}
+
 {% block title %}
     Office Battles | Battle List
 {% endblock %}
@@ -17,26 +19,36 @@
             <tr>
                 <th>Date</th>
                 <th>Game</th>
-                <th>Players</th>
-                <th>Results</th>
+                <th>Home</th>
+                <th>Away</th>
+                <th>Result</th>
             </tr>
             {% for battle in battles %}
                 <tr>
-                    <td>{{ battle.created }}</td>
-                    <td>{{ battle.game }}</td>
                     <td>
-                        <ul>
-                            {% for result in battle.result_set.all %}
-                                <li>{{ result.player }}</li>
-                            {% endfor %}
-                        </ul>
+                        {{ battle.created }}
                     </td>
                     <td>
-                        <ul>
-                            {% for result in battle.result_set.all %}
-                                <li>{{ result.score }}</li>
-                            {% endfor %}
-                        </ul>
+                        {{ battle.game }}
+                    </td>
+                    <td>
+                        {% for result in battle.result_set|team:'home' %}
+                            {{ result.player }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for result in battle.result_set|team:'away' %}
+                            {{ result.player }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for result in battle.result_set|team:'home' %}
+                            {{ result.score }}
+                        {% endfor %}
+                        -
+                        {% for result in battle.result_set|team:'away' %}
+                            {{ result.score }}
+                        {% endfor %}
                     </td>
                 </tr>
             {% endfor %}
